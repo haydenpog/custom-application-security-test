@@ -43,8 +43,6 @@ namespace authtest
 "HTTPDebuggerSvc",
 "ResourceHacker",
 "ProcessHacker",
-// if i forget to remove the notepad please remove from ur version
-"notepad",
 "cheatengine-x86_64-SSE4-AVX2",
 "cheatengine-i386",
 "cheatengine-x86_64" };
@@ -79,7 +77,7 @@ namespace authtest
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // 100% janky ignore my shiity cshart
+            // 100% janky ignore my shiity cshart but it workie
             for (int i = 0; i < 35; i++)
             {
 
