@@ -16,3 +16,4 @@ C:\Users\leehe\Downloads\Sens_Sapphire_Recoil\custom-auth-test\authtest\obj\Debu
 C:\Users\leehe\Downloads\Sens_Sapphire_Recoil\custom-auth-test\authtest\obj\Debug\net6.0-windows\authtest.genruntimeconfig.cache
 C:\Users\leehe\Downloads\Sens_Sapphire_Recoil\custom-auth-test\authtest\obj\Debug\net6.0-windows\ref\authtest.dll
 C:\Users\leehe\Downloads\Sens_Sapphire_Recoil\custom-auth-test\authtest\obj\Debug\net6.0-windows\authtest.main.resources
+C:\Users\leehe\Downloads\Sens_Sapphire_Recoil\custom-auth-test\authtest\obj\Debug\net6.0-windows\authtest.Properties.Resources.resources
