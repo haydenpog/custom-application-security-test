@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 // btw before you look at this keep in mind i'm just testing for my self (DONT USE THIS FOR PAID PROJECTS YOU WILL GET CRACKED IN HALF A MILISECOND)
+// You are allowed to take specific parts of this code for paid projects, I really don't care.
 namespace authtest
 {
     public partial class login : Form
@@ -50,9 +51,8 @@ namespace authtest
         {
             // shitty method of encrypting password and username information when sending to the server
             string authkey = Encode(textBox1.Text + textBox2.Text);
-            string request1 = Encode(authkey);
-            string request2 = Encode(request1);
-            Console.WriteLine(request2); // key you send under base256 | do what I did here but in your backend. just do base64 decoding 3 times | You can add more if you want idrc
+          
+            Console.WriteLine(authkey); // key you send under base64 | do what I did in reverse but in your backend. just do base64 decoding via js
 
             if (textBox1.Text == "") 
             {
@@ -64,6 +64,8 @@ namespace authtest
             }
        
             // Do your backend connection code here.
+            // not going to add here just because almost all backends are different.
+           
 
 
         }
@@ -115,14 +117,28 @@ namespace authtest
             HWID = System.Security.Principal.WindowsIdentity.GetCurrent().User.Value;
             HWID = Encode(HWID);
             MessageBox.Show(HWID);
-            // I also recommend that you uh dont do this. Make a way so someone cant just run an autoresponder on it. Making it just copy is an easy way. Possibly change the hwid serversided so somone cant just make a pastebin
-            // for exmaple
+            // I also recommend that you uh dont do this. Make a way so someone cant just run an autoresponder on it. Making it just copy is an easy way for someone to make an autoresponder. Possibly change the hwid serversided so somone cant just make a pastebin
             Clipboard.SetText(HWID);
             // This disables any type of proxys used for programs like fiddler and maybe some normal fiddler api autoresponders using that method.
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);
-            registry.SetValue("ProxyEnable", 0);
-            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
-            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+            // This does not disable programs that use services. I still recommend using SSL Pinning.
+            RegistryKey registry = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true); // grabs register
+            registry.SetValue("ProxyEnable", 0); // Sets the value to disable proxy settings
+            settingsReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0); // Refreshes settings if it changed
+            refreshReturn = InternetSetOption(IntPtr.Zero, INTERNET_OPTION_REFRESH, IntPtr.Zero, 0); // refreshes settings
+            // SSL Pinning --> https://stackoverflow.com/questions/46777017/c-sharp-net-pinning-certificates-authorities-i-am-doing-it-correctly
+            // SSL Pinning checks if it responds with your unique ssl meaning you cant use autoresponders on it. 
+            // After that All you really need is good obfuscation and you should be fine.
+            // Make a few auth checks within your code so it checks if you bypassed altogether and closes. For example look right below here
+            bool tyui = false;
+            // Set tyui to true during auth sequence
+            /*
+            if(tyui == false) 
+            {
+                Environment.Exit(1);
+            }
+            */
+            // Than you could put that enviroment exit code in your main forms so nobody can Form1.Show to bypass using some dnspy shit.
+
         }
     }
 }
